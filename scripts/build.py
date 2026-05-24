@@ -139,10 +139,10 @@ def head_html(title, description, canonical_path, og_image=None):
 <meta name="twitter:description" content="{description}">
 <meta name="twitter:image" content="{og_image_url}">
 
-<!-- 검색엔진 사이트확인 (네이버/구글 등록 시 채워넣음) -->
-<!-- 검색엔진 사이트확인 (착한설비 새 계정으로 네이버/구글 등록 시 여기에 추가) -->
-<!-- 예: <meta name="naver-site-verification" content="..."> -->
-<!-- 예: <meta name="google-site-verification" content="..."> -->
+<!-- 검색엔진 사이트확인 -->
+<meta name="naver-site-verification" content="1630e9f78a79ef9783998cdc0baae29ee9e0945f" />
+<!-- 구글 등록 시 아래 주석을 풀고 코드 입력 -->
+<!-- <meta name="google-site-verification" content="..." /> -->
 
 <link rel="canonical" href="{canonical}">
 <link rel="stylesheet" href="/assets/css/style.css">
