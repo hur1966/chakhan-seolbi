@@ -166,7 +166,7 @@ def head_html(title, description, canonical_path, og_image=None):
   "telephone": "{BIZ['phone']}",
   "url": "{SITE_URL_TECHNICAL}",
   "description": "{BIZ['description']}",
-  "areaServed": ["김해", "창원"],
+  "areaServed": ["부산", "경남"],
   "openingHours": "Mo-Su 00:00-23:59",
   "priceRange": "₩₩"
 }}
@@ -179,15 +179,13 @@ def head_html(title, description, canonical_path, og_image=None):
 def header_html():
     return f"""
 <div class="top-bar">
-  📞 24시간 출장 상담 — <a href="tel:{BIZ['phone_tel']}" style="color:#fff;text-decoration:underline;">{BIZ['phone_display']}</a>
-  &nbsp;|&nbsp;
-  <a href="{BIZ['kakao_url']}" target="_blank" style="color:#fff;text-decoration:underline;">💬 카톡 상담</a>
+  📞 24시간 출장 상담 — <a href="tel:{BIZ['phone_tel']}" style="color:inherit;text-decoration:underline;">{BIZ['phone_display']}</a>
+  &nbsp;|&nbsp; 부산·경남 전지역
 </div>
 <header class="header">
   <div class="header-inner">
     <a href="/" class="logo">{BIZ['name']}</a>
     <div class="header-actions">
-      <a href="{BIZ['kakao_url']}" target="_blank" class="header-kakao">💬 카톡상담</a>
       <a href="tel:{BIZ['phone_tel']}" class="header-phone">📞 {BIZ['phone_display']}</a>
     </div>
   </div>
@@ -198,13 +196,9 @@ def header_html():
 def floating_call_html():
     return f"""
 <div class="floating-buttons">
-  <a href="{BIZ['kakao_url']}" target="_blank" class="floating-kakao">
-    <span class="floating-icon">💬</span>
-    <span class="floating-text">카톡상담</span>
-  </a>
   <a href="tel:{BIZ['phone_tel']}" class="floating-call">
     <span class="floating-icon">📞</span>
-    <span class="floating-text">즉시통화</span>
+    <span class="floating-text">전화 상담<small>{BIZ['phone_display']}</small></span>
   </a>
 </div>
 """
@@ -215,7 +209,7 @@ def footer_html():
 <footer class="footer">
   <div class="footer-info">
     <strong>{BIZ['name']}</strong>
-    <p>김해·창원 전지역 배관설비 출장 서비스</p>
+    <p>부산·경남 전지역 배관설비 출장 서비스</p>
     <p>📞 {BIZ['phone_display']} (연중무휴 24시간 상담)</p>
   </div>
   <div class="footer-bottom">
@@ -232,20 +226,19 @@ def cta_box_html(text="작업 상담은 전화 한 통이면 끝!"):
     return f"""
 <div class="cta-box">
   <h3>지금 막힘·누수로 곤란하신가요?</h3>
-  <p>{text} 김해·창원 전지역 빠른 출장 가능합니다.</p>
+  <p>{text} 부산·경남 전지역 빠른 출장 가능합니다.</p>
   <div class="cta-buttons">
     <a href="tel:{BIZ['phone_tel']}" class="btn btn-cta-call">📞 {BIZ['phone_display']}</a>
-    <a href="{BIZ['kakao_url']}" target="_blank" class="btn btn-cta-kakao">💬 카톡으로 상담받기</a>
   </div>
-  <p class="cta-tip">💡 카톡으로 작업 부위 사진 보내주시면 정확한 견적을 빠르게 안내드립니다!</p>
+  <p class="cta-tip">💡 전화 주시면 작업 부위를 여쭤보고 예상 견적을 빠르게 안내드립니다!</p>
 </div>
 """
 
 
 def service_icon_svg(slug):
     """서비스별 커스텀 SVG 아이콘"""
-    primary = "#2d4a2b"
-    accent = "#8b6f47"
+    primary = "#0f7a63"
+    accent = "#0b5e4c"
 
     if slug == "drain-clog":
         # 하수구 막힘 — P트랩 배관
@@ -307,7 +300,7 @@ def service_icon_svg(slug):
 # 1. 메인 페이지 생성
 # ============================================================
 def build_index():
-    title = f"{BIZ['name']} | 김해·창원 배관설비 24시간 출장"
+    title = f"{BIZ['name']} | 부산·경남 배관설비 24시간 출장"
     desc = BIZ["description"]
     html = head_html(title, desc, "/")
     html += header_html()
@@ -320,10 +313,9 @@ def build_index():
   <p class="subtitle">— {BIZ['name']} —</p>
   <div class="cta-group">
     <a href="tel:{BIZ['phone_tel']}" class="btn btn-primary">📞 {BIZ['phone_display']}</a>
-    <a href="{BIZ['kakao_url']}" target="_blank" class="btn btn-kakao">💬 카톡 상담</a>
     <a href="#services" class="btn btn-secondary">서비스 보기</a>
   </div>
-  <p class="hero-tip">💡 카톡으로 사진 보내주시면 빠른 견적 안내!</p>
+  <p class="hero-tip">💡 전화 주시면 예상 견적을 빠르게 안내드립니다!</p>
 </section>
 
 <section class="trust-stats">
@@ -360,7 +352,7 @@ def build_index():
     html += "</div></section>"
 
     # 특장점
-    html += """
+    html += f"""
 <section class="features">
   <div class="container">
     <h2 class="section-title">왜 {BIZ['name']}인가요?</h2>
@@ -368,7 +360,7 @@ def build_index():
       <div class="feature-item">
         <div class="feature-num">1</div>
         <h4>당일 즉시 출동</h4>
-        <p>전화 한 통이면 김해·창원 어디든 빠르게 출장 갑니다.</p>
+        <p>전화 한 통이면 부산·경남 어디든 빠르게 출장 갑니다.</p>
       </div>
       <div class="feature-item">
         <div class="feature-num">2</div>
@@ -393,7 +385,7 @@ def build_index():
     # 작업 가능 지역
     html += '<section class="regions-block container">'
     html += '<h2 class="section-title">작업 가능 지역</h2>'
-    html += '<p class="section-subtitle">김해·창원 전지역, 클릭 시 해당 지역 안내 페이지로 이동합니다</p>'
+    html += '<p class="section-subtitle">부산·경남 전지역, 클릭 시 해당 지역 안내 페이지로 이동합니다</p>'
     for region_key, region_data in REGIONS.items():
         html += f'<div class="region-group"><h3>{region_data["name"]}</h3><div class="region-tags">'
         for d in region_data["districts"]:
@@ -428,7 +420,7 @@ def build_index():
         if len(posts) > 6:
             html += f"""
 <div style="text-align:center;margin:30px auto 10px;">
-  <a href="/reviews/" style="display:inline-block;padding:14px 32px;background:#2d4a2b;color:#fff;border-radius:8px;text-decoration:none;font-weight:700;font-size:1.05em;">
+  <a href="/reviews/" style="display:inline-block;padding:14px 32px;background:#0f7a63;color:#fff;border-radius:8px;text-decoration:none;font-weight:700;font-size:1.05em;">
     📋 전체 후기 보기 (총 {len(posts)}건) →
   </a>
 </div>
@@ -718,7 +710,7 @@ def build_region_service_pages():
 
 <article class="post-content">
   <h2>{d['name']} 지역 {s['name']} 작업, {BIZ['name']}에 맡겨주세요</h2>
-  <p>안녕하세요, 김해·창원 배관설비 전문업체 <strong>{BIZ['name']}</strong>입니다.
+  <p>안녕하세요, 부산·경남 배관설비 전문업체 <strong>{BIZ['name']}</strong>입니다.
   {city_name} {d['name']} 일대에서 {s['name']} 작업이 필요하신 고객님께 빠르고 정확한 시공으로 보답드리고 있습니다.</p>
 
   <p>{s['description']}</p>
@@ -887,7 +879,7 @@ def render_related_posts_section(current_post, related):
     # 전체 후기 보기 버튼
     html += """
 <div style="text-align:center;margin-top:30px;">
-  <a href="/reviews/" style="display:inline-block;padding:14px 32px;background:#2d4a2b;color:#fff;border-radius:8px;text-decoration:none;font-weight:700;">
+  <a href="/reviews/" style="display:inline-block;padding:14px 32px;background:#0f7a63;color:#fff;border-radius:8px;text-decoration:none;font-weight:700;">
     📋 전체 후기 보기 →
   </a>
 </div>
@@ -1006,13 +998,13 @@ def build_reviews_index():
 <section class="post-header">
   <h1>📋 {BIZ['name']} 전체 작업 후기</h1>
   <div class="post-meta">
-    <span>📍 김해·창원 지역</span>
+    <span>📍 부산·경남 지역</span>
     <span>📝 총 {len(posts)}건의 후기</span>
   </div>
 </section>
 
 <article class="post-content">
-  <p>안녕하세요, 김해·창원 배관설비 전문 <strong>{BIZ['name']}</strong>입니다.
+  <p>안녕하세요, 부산·경남 배관설비 전문 <strong>{BIZ['name']}</strong>입니다.
   실제 작업 후기들을 한눈에 보실 수 있도록 정리했습니다.
   각 후기를 클릭하시면 시공 과정과 사진을 자세히 확인하실 수 있어요.</p>
 </article>
@@ -1047,7 +1039,7 @@ def build_reviews_index():
             # 이전 버튼
             if page_num > 1:
                 prev_path = "/reviews/" if page_num == 2 else f"/reviews/page/{page_num - 1}/"
-                html += f'<a href="{prev_path}" class="page-link" style="display:inline-block;padding:10px 16px;margin:0 4px;background:#fff;border:1px solid #2d4a2b;color:#2d4a2b;border-radius:6px;text-decoration:none;font-weight:600;">← 이전</a>'
+                html += f'<a href="{prev_path}" class="page-link" style="display:inline-block;padding:10px 16px;margin:0 4px;background:#fff;border:1px solid #0f7a63;color:#0f7a63;border-radius:6px;text-decoration:none;font-weight:600;">← 이전</a>'
             else:
                 html += '<span class="page-link disabled" style="display:inline-block;padding:10px 16px;margin:0 4px;background:#f5f5f5;border:1px solid #ccc;color:#999;border-radius:6px;font-weight:600;">← 이전</span>'
 
@@ -1056,14 +1048,14 @@ def build_reviews_index():
                 page_path = "/reviews/" if i == 1 else f"/reviews/page/{i}/"
                 if i == page_num:
                     # 현재 페이지 (강조)
-                    html += f'<span class="page-link current" style="display:inline-block;padding:10px 16px;margin:0 4px;background:#2d4a2b;color:#fff;border-radius:6px;font-weight:700;">{i}</span>'
+                    html += f'<span class="page-link current" style="display:inline-block;padding:10px 16px;margin:0 4px;background:#0f7a63;color:#fff;border-radius:6px;font-weight:700;">{i}</span>'
                 else:
-                    html += f'<a href="{page_path}" class="page-link" style="display:inline-block;padding:10px 16px;margin:0 4px;background:#fff;border:1px solid #2d4a2b;color:#2d4a2b;border-radius:6px;text-decoration:none;font-weight:600;">{i}</a>'
+                    html += f'<a href="{page_path}" class="page-link" style="display:inline-block;padding:10px 16px;margin:0 4px;background:#fff;border:1px solid #0f7a63;color:#0f7a63;border-radius:6px;text-decoration:none;font-weight:600;">{i}</a>'
 
             # 다음 버튼
             if page_num < total_pages:
                 next_path = f"/reviews/page/{page_num + 1}/"
-                html += f'<a href="{next_path}" class="page-link" style="display:inline-block;padding:10px 16px;margin:0 4px;background:#fff;border:1px solid #2d4a2b;color:#2d4a2b;border-radius:6px;text-decoration:none;font-weight:600;">다음 →</a>'
+                html += f'<a href="{next_path}" class="page-link" style="display:inline-block;padding:10px 16px;margin:0 4px;background:#fff;border:1px solid #0f7a63;color:#0f7a63;border-radius:6px;text-decoration:none;font-weight:600;">다음 →</a>'
             else:
                 html += '<span class="page-link disabled" style="display:inline-block;padding:10px 16px;margin:0 4px;background:#f5f5f5;border:1px solid #ccc;color:#999;border-radius:6px;font-weight:600;">다음 →</span>'
 
